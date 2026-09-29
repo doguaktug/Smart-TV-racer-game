@@ -17,8 +17,6 @@ Playable on a TV remote. Not designed only for a remote. Gamepad and keyboard mu
 
 ## Controls
 
-Always on:
-
 - Steer left / right
 - Brake
 - Aggression
@@ -33,6 +31,8 @@ Aggression changes the other buttons:
 - Aggression + brake = juke
 
 While you smash, left and right are not steering. You are committed for a short time.
+
+Since most TV remotes don't support double inputs if an action is taken within 300ms after the aggression button is pressed it is passed as a combo as well.
 
 ## Core loop
 
