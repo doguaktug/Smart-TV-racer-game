@@ -26,6 +26,8 @@ export const TUNING = {
   edgeScrub: 15,
   /** Half the car's width, metres. */
   halfWidth: 1,
+  /** Half the car's length, metres. */
+  halfLength: 2.25,
 };
 
 /** Advance every car by dt seconds. inputs[i] = action bits for car i. */
