@@ -5,7 +5,7 @@
 export const MIN_CARS = 4;
 export const MAX_CARS = 8;
 
-const FIELD_COUNT = 5;
+const FIELD_COUNT = 8;
 
 export interface Cars {
   readonly count: number;
@@ -21,6 +21,12 @@ export interface Cars {
   readonly heading: Float64Array;
   /** Completed laps. */
   readonly lap: Float64Array;
+  /** Seconds of draft built up, capped at the top tier. Drains when out of the draft. */
+  readonly draft: Float64Array;
+  /** Index of the car whose slipstream this one is in (or, after a locked-in pair, is still pressing beside). -1 = none. */
+  readonly leader: Float64Array;
+  /** Seconds spent in the current leader's slipstream. The pair counts once this reaches DRAFT.lockIn. */
+  readonly lock: Float64Array;
 }
 
 export function createCars(count: number): Cars {
@@ -29,7 +35,7 @@ export function createCars(count: number): Cars {
   }
   const data = new Float64Array(FIELD_COUNT * count);
   const field = (i: number) => data.subarray(i * count, (i + 1) * count);
-  return {
+  const cars = {
     count,
     data,
     s: field(0),
@@ -37,7 +43,12 @@ export function createCars(count: number): Cars {
     v: field(2),
     heading: field(3),
     lap: field(4),
+    draft: field(5),
+    leader: field(6),
+    lock: field(7),
   };
+  cars.leader.fill(-1);
+  return cars;
 }
 
 /** Overwrite dst with src. Used to take and restore rollback snapshots. */

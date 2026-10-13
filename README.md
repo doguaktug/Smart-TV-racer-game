@@ -40,15 +40,26 @@ Cars have similar acceleration and top speed. Small speed gaps decide the race.
 
 ### Drafting
 
-Sit behind another car. Both the leader and the follower gain speed. Keep the positions and the bonus grows in tiers. Longer draft = higher tier. Can be indicated by: small red flames from tires/under the cars lvl1 - green fire lowkey surrounding the cars lvl2 - blue flames surrounding the cars lvl3
+Cars are 2 m wide and 4.5 m long.
+
+Sit behind another car. Two limits:
+
+- Along the track: at most 3 m from your front bumper to their rear bumper.
+- Side to side: less than 1.5 m between the two cars' centre lines. Cars are 2 m wide, so at least 0.5 m of the cars overlap.
+
+Hold it for 2 seconds and the two cars lock in as a drafting pair.
+
+Both the leader and the follower gain top speed. Keep the positions and the bonus grows in tiers. Longer draft = higher tier. Can be indicated by: small red flames from tires/under the cars lvl1 - green fire lowkey surrounding the cars lvl2 - blue flames surrounding the cars lvl3
+
+A drafting pair also gains on cars that are not in the draft.
+
+The pair breaks when the follower drifts out past the limits. There is a 0.1 m margin on the break (3.1 m bumper to bumper, 1.6 m between centre lines), so a pair does not flicker in and out.
+
+When the pair breaks, both cars start to lose the extra speed from the draft.
 
 The leader can weave left and right to lose the tail. Weaving costs speed (because by leaving the straight path geometrically you are traveling a longer distance with the same velocity).
 
-The follower can leave the draft to pass, using built-up speed. The pass is automatic: steer out of the slipstream. The extra speed fades fast, so timing still matters.
-
-When the follower leaves, the leader loses the draft bonus and slows a little.
-
-A drafting pair also gains on cars that are not in the draft.
+To pass, the follower steers out and pulls up tight beside the leader: 2–2.5 m between centre lines (at most 0.5 m of space between the cars' sides), with the bumpers 0.3 m or closer along the track. While it presses there, the leader gets extra deceleration. This lasts until the two cars are side by side (centres level). Only the car that was drafting that leader can do this, and it has to stay close (within 3.1 m bumper to bumper, less than 2.5 m between centre lines) after leaving the draft or it loses the chance.
 
 ### Smash
 
