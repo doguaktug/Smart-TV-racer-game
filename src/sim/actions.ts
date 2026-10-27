@@ -4,6 +4,8 @@
 export const LEFT = 1;
 export const RIGHT = 2;
 export const BRAKE = 4;
+/** Changes the others: + LEFT / RIGHT = smash, + BRAKE = juke (smash.ts). */
+export const AGGRO = 8;
 
 /** -1 = left, +1 = right, 0 = neither or both. */
 export function steerDir(bits: number): number {
