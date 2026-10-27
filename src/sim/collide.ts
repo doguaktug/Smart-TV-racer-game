@@ -98,9 +98,12 @@ export function contact(cars: Cars, track: Track, i: number, j: number): Contact
   return hit;
 }
 
-/** Move car k by (ds, dx), keeping it on the road. */
+/** Move car k by (ds, dx), keeping it on the road. A push across the line counts the lap. */
 function nudge(cars: Cars, track: Track, k: number, ds: number, dx: number): void {
-  const s = wrapS(track, cars.s[k]! + ds);
+  const raw = cars.s[k]! + ds;
+  if (raw < 0) cars.lap[k] = cars.lap[k]! - 1;
+  else if (raw >= track.length) cars.lap[k] = cars.lap[k]! + 1;
+  const s = wrapS(track, raw);
   const edge = track.width[segmentIndex(track, s)]! / 2 - TUNING.halfWidth;
   const x = cars.x[k]! + dx;
   cars.s[k] = s;
