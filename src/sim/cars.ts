@@ -5,7 +5,7 @@
 export const MIN_CARS = 4;
 export const MAX_CARS = 8;
 
-const FIELD_COUNT = 14;
+const FIELD_COUNT = 15;
 
 export interface Cars {
   readonly count: number;
@@ -19,7 +19,7 @@ export interface Cars {
   readonly v: Float64Array;
   /** Heading relative to the road direction, radians. 0 = straight down the road, + = right. */
   readonly heading: Float64Array;
-  /** Completed laps. */
+  /** Completed laps. -1 on the grid, before the first crossing of the line. */
   readonly lap: Float64Array;
   /** Seconds of draft built up, capped at the top tier. Drains when out of the draft. */
   readonly draft: Float64Array;
@@ -39,6 +39,8 @@ export interface Cars {
   readonly jukeV: Float64Array;
   /** Seconds until this car may juke again. */
   readonly jukeCd: Float64Array;
+  /** Tick on which this car finished the race. -1 = still racing. */
+  readonly finish: Float64Array;
 }
 
 export function createCars(count: number): Cars {
@@ -64,8 +66,10 @@ export function createCars(count: number): Cars {
     juke: field(11),
     jukeV: field(12),
     jukeCd: field(13),
+    finish: field(14),
   };
   cars.leader.fill(-1);
+  cars.finish.fill(-1);
   return cars;
 }
 
