@@ -108,6 +108,15 @@ export function wrapS(track: Track, s: number): number {
   return r < 0 ? r + track.length : r;
 }
 
+/** Signed distance from s `from` forward to s `to`, wrapped into [-length/2, length/2). */
+export function gapAhead(track: Track, from: number, to: number): number {
+  const half = track.length / 2;
+  let d = to - from;
+  if (d >= half) d -= track.length;
+  else if (d < -half) d += track.length;
+  return d;
+}
+
 /** Index of the segment that contains distance s (any value; it is wrapped). */
 export function segmentIndex(track: Track, s: number): number {
   const i = Math.floor(wrapS(track, s) / track.segLen);

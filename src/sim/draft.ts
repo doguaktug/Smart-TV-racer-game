@@ -11,7 +11,7 @@
 import { BRAKE } from "./actions";
 import type { Cars } from "./cars";
 import { TUNING } from "./physics";
-import type { Track } from "../track/track";
+import { gapAhead, type Track } from "../track/track";
 
 export const DRAFT = {
   /** Max gap to the car ahead, bumper to bumper along the track, metres. */
@@ -42,15 +42,6 @@ export const DRAFT = {
 export function draftTier(seconds: number): number {
   const t = DRAFT.tierTime;
   return seconds >= t[2]! ? 3 : seconds >= t[1]! ? 2 : seconds >= t[0]! ? 1 : 0;
-}
-
-/** Signed distance from s `from` forward to s `to`, wrapped into [-length/2, length/2). */
-function gapAhead(track: Track, from: number, to: number): number {
-  const half = track.length / 2;
-  let d = to - from;
-  if (d >= half) d -= track.length;
-  else if (d < -half) d += track.length;
-  return d;
 }
 
 /** Centre-to-centre gap that puts the bumpers DRAFT.range apart. */

@@ -5,7 +5,7 @@
 export const MIN_CARS = 4;
 export const MAX_CARS = 8;
 
-const FIELD_COUNT = 8;
+const FIELD_COUNT = 14;
 
 export interface Cars {
   readonly count: number;
@@ -27,6 +27,18 @@ export interface Cars {
   readonly leader: Float64Array;
   /** Seconds spent in the current leader's slipstream. The pair counts once this reaches DRAFT.lockIn. */
   readonly lock: Float64Array;
+  /** Extra turn rate from being hit, rad/s. Fades to 0. */
+  readonly yaw: Float64Array;
+  /** Seconds of smash lunge left, signed: + = right, - = left, 0 = not smashing. */
+  readonly smash: Float64Array;
+  /** Seconds until this car may smash again. */
+  readonly cooldown: Float64Array;
+  /** Seconds of juke window left, 0 = not juking. */
+  readonly juke: Float64Array;
+  /** Speed when the juke started, m/s. -1 = this juke already dodged a smash. */
+  readonly jukeV: Float64Array;
+  /** Seconds until this car may juke again. */
+  readonly jukeCd: Float64Array;
 }
 
 export function createCars(count: number): Cars {
@@ -46,6 +58,12 @@ export function createCars(count: number): Cars {
     draft: field(5),
     leader: field(6),
     lock: field(7),
+    yaw: field(8),
+    smash: field(9),
+    cooldown: field(10),
+    juke: field(11),
+    jukeV: field(12),
+    jukeCd: field(13),
   };
   cars.leader.fill(-1);
   return cars;

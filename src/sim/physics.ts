@@ -2,7 +2,7 @@
 // offset, heading = angle relative to the road. All cars use the same numbers;
 // rules (draft, smash, ...) change speed on top of this.
 
-import { BRAKE, steerDir } from "./actions";
+import { AGGRO, BRAKE, steerDir } from "./actions";
 import type { Cars } from "./cars";
 import { approach, dcos, dsin } from "./dmath";
 import { segmentIndex, type Track } from "../track/track";
@@ -24,6 +24,8 @@ export const TUNING = {
   maxHeading: 0.6,
   /** Extra deceleration while scraping the road edge, m/s². */
   edgeScrub: 15,
+  /** How fast a hit's extra turn rate fades, rad/s². */
+  yawDamp: 3,
   /** Half the car's width, metres. */
   halfWidth: 1,
   /** Half the car's length, metres. */
@@ -34,7 +36,8 @@ export const TUNING = {
 export function stepPhysics(cars: Cars, track: Track, inputs: Uint8Array, dt: number): void {
   const T = TUNING;
   for (let i = 0; i < cars.count; i++) {
-    const bits = inputs[i]!;
+    // Aggression turns brake and steer into juke and smash (smash.ts); a smash locks steering.
+    const bits = (inputs[i]! & AGGRO) !== 0 || cars.smash[i] !== 0 ? 0 : inputs[i]!;
     const seg = segmentIndex(track, cars.s[i]!);
     const k = track.curvature[seg]!;
     let v = cars.v[i]!;
@@ -50,6 +53,11 @@ export function stepPhysics(cars: Cars, track: Track, inputs: Uint8Array, dt: nu
     const dir = steerDir(bits);
     if (dir !== 0) h += dir * maxYaw * dt;
     else h = approach(h, 0, Math.min(T.recenterRate, maxYaw) * dt);
+
+    // Turn from being hit (collide.ts), fading out.
+    const yaw = cars.yaw[i]!;
+    h += yaw * dt;
+    cars.yaw[i] = approach(yaw, 0, T.yawDamp * dt);
 
     // Move. Inside of a turn (k * x > 0) is shorter, so s advances faster there.
     const ds = (v * dcos(h) * dt) / (1 - k * x);

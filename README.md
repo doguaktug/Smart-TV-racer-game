@@ -63,21 +63,33 @@ To pass, the follower steers out and pulls up tight beside the leader: 2–2.5 m
 
 ### Smash
 
-Smash only works on a car that is already beside you, not a car fully behind you.
+A smash is a short sideways lunge (0.3 s). Steering is locked while it lasts.
 
-On a successful smash, the hit car loses a lot of speed (into the roadside, another car, or an obstacle). The smasher gets a small speed boost.
+Smash only works on a car that is already beside you, not a car ahead of or fully behind you. The first car the lunge reaches on that side is hit.
 
-If the follower predicts the smash and jukes, the smasher misses. On a narrow road the smasher hits a barrier and loses a lot of speed. On a wide road the smasher swings and still loses some speed. A successful juke also gives a small speed boost.
+On a successful smash, the hit car loses a lot of speed and its nose is turned toward the side it was pushed (into the roadside, another car, or an obstacle). The smasher gets a small speed boost.
 
-Smash has no durability / damage meter. Contact only changes speed. A missed smash must cost enough that players cannot spam it (although there is a cooldown).
+A lunge that hits no one is a miss. If it ends at the road edge, the smasher hits the barrier and loses a lot of speed. Otherwise it swings at air and still loses some speed. On a narrow road the lunge reaches the edge more easily, so misses there cost more.
+
+Smash has no durability / damage meter. Contact only changes speed. A missed smash must cost enough that players cannot spam it, and there is a cooldown (3 s).
+
+### Juke
+
+A juke is a short hard brake (0.25 s window) that drops your car back.
+
+If a smash reaches you during the window, it misses. You get back the speed you had before the brake, plus a little more, so a good read keeps your position. You cannot be hit by that lunge for the rest of it.
+
+If no smash comes, the juke is just a hard brake with nothing to make up for it. That, more than the cooldown (1.5 s), is what stops players from spamming it.
 
 ### Rear bumps
 
-A rear bump helps the front car and hurts the back car. The car in front can also juke the bump (example: when the leader might have slowed down significantly for a very hard turn and the follower might be coming in hot to mess up the leaders angle)
+A rear bump pushes the front car and slows down the back car. A hit off the centre line also turns the car that was hit.
 
-If the hit is off-center, it also pushes the front car off its line (by little). A follower can punt on purpose: they lose speed, but they can ruin the leader's corner.
+A follower can punt on purpose: they lose speed, but they can ruin the leader's corner.
 
-Brake-checking is a net loss. The leader's own brake costs more speed than the bump gives back. Also the follower can juke a break check just like a smash.
+Brake-checking is a net loss. The leader's own brake costs more speed than the bump gives back.
+
+Planned, not built yet: juking a rear bump or a brake-check. On a straight, a push from behind helps the front car, so there is nothing to dodge. Coming into a corner, a juked bump would send the follower off to the side. Juking in or right before a corner can also cost the juker.
 
 ### Corners and racing line
 
